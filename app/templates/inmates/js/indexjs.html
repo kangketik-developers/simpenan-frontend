@@ -1,0 +1,87 @@
+<script>
+	$(document).on('click', '#deleteBtn', function (e) {
+		e.preventDefault();
+		var id = $(this).attr('data-id');
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, sure!',
+			cancelButtonText: 'No, cancel!',
+			reverseButtons: true
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					type: "DELETE",
+					url: "http://server.fathtech.co.id:8000/inmates/" + id,
+					success: function (response) {
+						Swal.fire({
+							icon: "success",
+							title: "Request Success!",
+							text: response.detail
+						}).then((result) => {
+							location.reload();
+						})
+					},
+					error: function (xhr, httpStatusMessage, customErrorMessage) {
+						Swal.fire({
+							icon: "error",
+							title: httpStatusMessage,
+							text: customErrorMessage
+						})
+					}
+				})
+			} else if (
+				result.dismiss === Swal.DismissReason.cancel
+			) {
+				// 
+			}
+		})
+	});
+
+	$(document).on('click', '#trainBtn', function (e) {
+		e.preventDefault();
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, sure!',
+			cancelButtonText: 'No, cancel!',
+			reverseButtons: true
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					type: "GET",
+					url: "http://server.fathtech.co.id:8000/inmates/training/",
+					beforeSend: function () {
+						document.querySelector('body').classList.remove("loaded")
+					},
+					success: function (response) {
+						document.querySelector('body').classList.add("loaded")
+						Swal.fire({
+							icon: "success",
+							title: "Request Success!",
+							text: "Accuracy: " + response.acc + " with loss: " + response.loss
+						}).then((result) => {
+							location.reload();
+						})
+					},
+					error: function (xhr, httpStatusMessage, customErrorMessage) {
+						document.querySelector('body').classList.add("loaded")
+						Swal.fire({
+							icon: "error",
+							title: httpStatusMessage,
+							text: customErrorMessage
+						})
+					}
+				})
+			} else if (
+				result.dismiss === Swal.DismissReason.cancel
+			) {
+				// 
+			}
+		})
+	});
+</script>

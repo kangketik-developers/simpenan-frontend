@@ -1,0 +1,64 @@
+{% extends "layouts/base.html" %}
+{% block title %} Users {% endblock %}
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<main class="content">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Tabel daftar <i>{{data[0]}}</i></h5>
+                        <h6 class="card-subtitle text-muted">Silahkan kelola <i>{{data[0]}}</i> di sini. Tekan tombol
+                            tambah, edit atau delete untuk melakukan perubahan.</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">No.</th>
+                                        <th>Nama</th>
+                                        <th>Username</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if (data[1] is defined) and data[1] %}
+                                    {% for user in data[1] %}
+                                    <tr>
+                                        <td class="text-center">{{ loop.index }}</td>
+                                        <td>{{ user['fullname'] }}</td>
+                                        <td>{{ user['username'] }}</td>
+                                        <td class="table-action">
+                                            <a href="/users/detail/{{ user['id'] }}" class="btn btn-sm btn-link">
+                                                <i class="align-middle" data-feather="edit-2"></i>
+                                            </a>
+                                            <!-- Delete Button -->
+                                            <button type="button" id="deleteBtn" class="btn btn-sm btn-link" data-id="{{user['id']}}">
+                                                <i class="align-middle" data-feather="trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                    <tr>
+                                        <td class="text-center" colspan="5">Tidak ada data...</td>
+                                    </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/users/create" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}
+{% block javascripts %}
+{% include 'users/js/indexjs.html' %}
+{% endblock javascripts %}

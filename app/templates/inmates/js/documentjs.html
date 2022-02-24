@@ -1,0 +1,45 @@
+<script>
+	$('#Frm').submit(function (e) {
+		e.preventDefault();
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, sure!',
+			cancelButtonText: 'No, cancel!',
+			reverseButtons: true
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					type: "POST",
+					url: "http://server.fathtech.co.id:8000/inmates/document/{{ data[1]['id'] }}/",
+					data: new FormData(this),
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function (response) {
+						Swal.fire({
+							icon: "success",
+							title: "Request Success!",
+							text: response.detail
+						}).then((result) => {
+							location.reload();
+						})
+					},
+					error: function (xhr, httpStatusMessage, customErrorMessage) {
+						Swal.fire({
+							icon: "error",
+							title: httpStatusMessage,
+							text: customErrorMessage
+						})
+					}
+				})
+			} else if (
+				result.dismiss === Swal.DismissReason.cancel
+			) {
+				// 
+			}
+		})
+	});
+</script>

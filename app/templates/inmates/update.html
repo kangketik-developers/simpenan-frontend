@@ -1,0 +1,62 @@
+{% extends "layouts/base.html" %}
+{% block title %} Formulir Update Data Narapidana {% endblock %}
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<main class="content">
+	<div class="container-fluid p-0">
+		<div class="row">
+			<div class="col-12 col-xl-12">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="card-title">Formulir update <i>{{data[0]}}</i></h5>
+						<h6 class="card-subtitle text-muted">Kosongkan video jika tidak ingin mengganti sample video sebelumnya.</h6>
+					</div>
+					<form id="Frm">
+						<div class="card-body">
+							<div class="row">
+								<div class="mb-3 col-lg-6">
+									<label class="form-label">Nomor Registrasi</label>
+									<input type="text" name="regsitration_code" class="form-control" placeholder="Nomor Registrasi" autocomplete="off" value={{data[1]['regsitration_code']}}>
+								</div>
+								<div class="mb-3 col-lg-6">
+									<label class="form-label">Nama</label>
+									<input type="text" name="name" class="form-control" placeholder="Nama" autocomplete="off" value={{data[1]['name']}}>
+								</div>
+							</div>
+							<div class="row">
+								<div class="mb-3 col-lg-3">
+									<label class="form-label">Blok / Kamar</label>
+									<input type="text" name="room_block" class="form-control" placeholder="Blok / Kamar" autocomplete="off" value={{data[1]['room_block']}}>
+								</div>
+								<div class="mb-3 col-lg-3">
+									<label class="form-label">Pasal</label>
+									<input type="text" name="article" class="form-control" placeholder="Pasal" autocomplete="off" value={{data[1]['article']}}>
+								</div>
+								<div class="mb-3 col-lg-3">
+									<label class="form-label">Pidana</label>
+									<input type="text" name="punishment" class="form-control" placeholder="Pidana" autocomplete="off" value={{data[1]['punishment']}}>
+								</div>
+								<div class="mb-3 col-lg-3">
+									<label class="form-label">Pos Kerja</label>
+									<input type="text" name="work_post" class="form-control" placeholder="Pos Kerja" autocomplete="off" value={{data[1]['work_post']}}>
+								</div>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Keterangan</label>
+								<input type="text" name="description" class="form-control" placeholder="Keterangan" autocomplete="off" value={{data[1]['description']}}>
+							</div>
+						</div>
+						<div class="card-footer text-center">
+							<a href="/{{data[0]}}" class="btn btn-danger"><i class="fa fa-chevron-left"></i> Kembali</a>
+							<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock content %}
+{% block javascripts %}
+{% include 'inmates/js/updatejs.html' %}
+{% endblock javascripts %}

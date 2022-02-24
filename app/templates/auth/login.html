@@ -1,0 +1,45 @@
+{% extends "layouts/base-fullscreen.html" %}
+{% block title %} Login {% endblock %}
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<main id="login" class="d-flex w-100">
+    <div class="container d-flex flex-column">
+        <div class="row vh-100">
+            <div class="col-lg-4 mx-auto d-table" style="height: 85%;">
+                <div class="d-table-cell align-middle">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <img src="/static/assets/img/logo/logo-app.png" width="45%"/>
+                            </div>
+                            <form id="Frm" method="post">
+                                <div class="mb-2">
+                                    <label class="form-label">Usename</label>
+                                    <input class="form-control form-control-sm" type="text" name="username"
+                                           placeholder="Enter your username" autocomplete="off"/>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Password</label>
+                                    <input class="form-control form-control-sm" type="password" name="password"
+                                           placeholder="Enter your password" autocomplete="off"/>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-6">
+                                        <img src="/static/assets/img/logo/logo-copyright.png" width="50%"/>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <button type="submit" class="btn btn-sm btn-primary">Sign in</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}
+{% block javascripts %}
+{% include 'auth/js/loginjs.html' %}
+{% endblock javascripts %}

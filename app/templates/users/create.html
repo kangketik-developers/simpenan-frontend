@@ -1,0 +1,38 @@
+{% extends "layouts/base.html" %}
+{% block title %} Formulir Edit Data User {% endblock %}
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<main class="content">
+	<div class="container-fluid p-0">
+		<div class="row">
+			<div class="col-12 col-xl-12">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="card-title">Formulir tambah user</h5>
+						<h6 class="card-subtitle text-muted">Silahkan isi data di bawah ini, kemudian klik tombol simpan.</h6>
+					</div>
+					<form id="Frm">
+						<div class="card-body">
+							<div class="mb-3">
+								<label class="form-label">Nama</label>
+								<input type="text" name="fullname" class="form-control" placeholder="Nama" autocomplete="off">
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Username</label>
+								<input type="text" name="username" class="form-control" placeholder="Username" autocomplete="off">
+							</div>
+						</div>
+						<div class="card-footer text-center">
+							<a href="/users" class="btn btn-danger"><i class="fa fa-chevron-left"></i> Kembali</a>
+							<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock content %}
+{% block javascripts %}
+{% include 'users/js/createjs.html' %}
+{% endblock javascripts %}

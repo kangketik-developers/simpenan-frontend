@@ -1,0 +1,31 @@
+{% extends "layouts/base.html" %}
+{% block title %} Data Narapidana {% endblock %}
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<main class="content">
+	<div class="container-fluid p-0">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-body">
+						<form id="Frm">
+							<div class="row">
+								<div class="col-lg-12">
+									<label class="form-label">Nomor Registrasi</label>
+									<div class="input-group mb-3">
+										<input type="file" accept="image/*;capture=camera" name="file" class="form-control" placeholder="Nomor Registrasi" autocomplete="off">
+										<button class="btn btn-outline-primary" type="submit" id="button-addon2">Upload</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock content %}
+{% block javascripts %}
+{% include 'inmates/js/capturejs.html' %}
+{% endblock javascripts %}

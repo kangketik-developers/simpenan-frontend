@@ -1,0 +1,109 @@
+{% extends "layouts/base.html" %}
+{% block title %} Data Narapidana {% endblock %}
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<main class="content">
+	<div class="container-fluid p-0">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="row justify-content-center">
+							<div class="col-6">
+								<table class="table table-striped table-sm">
+									<thead>
+										<tr>
+											<th colspan="3" class="text-center bg-info text-light">Data WBP</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><strong>Nomor Registrasi</strong></td>
+											<td>:</td>
+											<td>{{data[1]['regsitration_code']}}</td>
+										</tr>
+										<tr>
+											<td><strong>Nama</strong></td>
+											<td>:</td>
+											<td>{{data[1]['name']}}</td>
+										</tr>
+										<tr>
+											<td><strong>Blok / Kamar</strong></td>
+											<td>:</td>
+											<td>{{data[1]['room_block']}}</td>
+										</tr>
+										<tr>
+											<td><strong>Pasal</strong></td>
+											<td>:</td>
+											<td>{{data[1]['article']}}</td>
+										</tr>
+										<tr>
+											<td><strong>Pidana</strong></td>
+											<td>:</td>
+											<td>{{data[1]['punishment']}}</td>
+										</tr>
+										<tr>
+											<td><strong>Pos Kerja</strong></td>
+											<td>:</td>
+											<td>{{data[1]['work_post']}}</td>
+										</tr>
+										<tr>
+											<td><strong>Keterangan</strong></td>
+											<td>:</td>
+											<td>{{data[1]['description']}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-6">
+								<table class="table table-striped table-sm">
+									<thead>
+										<tr>
+											<th colspan="3" class="text-center bg-primary text-light">Dokumen Pendukung</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% if (data[2] is defined) and data[2] %}
+										{% for docs in data[2] %}
+										<tr>
+											<td><strong>{{docs['description']}}</strong></td>
+											<td>:</td>
+											<td>
+												<a href="http://server.fathtech.co.id:8000{{docs['filepath']}}" class="btn btn-primary" target="_blank"><i class="fa fa-download"></i></a>
+												<!-- Delete Button -->
+												<button type="button" id="deleteBtn" class="btn btn-danger" data-id="{{docs['id']}}">
+													<i class="fa fa-trash"></i>
+												</button>
+											</td>
+										</tr>
+										{% endfor %}
+										{% else %}
+										<tr>
+											<td class="text-center" colspan="3">Tidak ada data...</td>
+										</tr>
+										{% endif %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						<a href="/{{data[0]}}" class="btn btn-danger"><i class="fa fa-chevron-left"></i> Kembali</a>
+						<!-- Formulir Dokumen -->
+						<a href="/{{data[0]}}/dokumen/{{ data[1]['id'] }}" class="btn btn-primary"><i class="fa fa-print"></i> Dokumen</a>
+						<!-- Formulir Sampel -->
+						<a href="/{{data[0]}}/capture/{{ data[1]['id'] }}" class="btn btn-info"><i class="fa fa-camera"></i> Capture Sample</a>
+						<!-- Genrate QRCode -->
+						<a href="/{{data[0]}}/qrcode/{{data[1]['id']}}" class="btn btn-secondary"><i class="fa fa-barcode"></i> Preview QRCode</a>
+						<!-- Update Inmates -->
+						<a href="/{{data[0]}}/update/{{data[1]['id']}}" class="btn btn-success"><i class="fa fa-edit"></i> Edit WBP</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock content %}
+{% block javascripts %}
+{% include 'inmates/js/detailjs.html' %}
+{% endblock javascripts %}

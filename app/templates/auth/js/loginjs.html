@@ -1,0 +1,42 @@
+<script>
+  $("#Frm").submit(function (e) {
+    e.preventDefault();
+    let timerInterval
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: "http://server.fathtech.co.id:8000/auth",
+      data: JSON.stringify($("#Frm").serializeJSON()),
+      success: function (data) {
+        var response = data;
+        Swal.fire({
+          icon: 'success',
+          title: 'Anda berhasil login!',
+          text: response.detail,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            $.session.set("token", response.token);
+            if ($.session.get("token") != "") {
+              location.href = "/dashboard"
+            }
+          }
+        })
+      },
+      error: function (xhr, httpStatusMessage, customErrorMessage) {
+        Swal.fire({
+          icon: 'error',
+          title: httpStatusMessage,
+          text: customErrorMessage
+        })
+      }
+    })
+  })
+</script>
