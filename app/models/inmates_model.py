@@ -2,7 +2,7 @@ import json
 
 import requests
 
-url = "http://151.106.112.217:8000/inmates"
+url = "http://10.10.10.2:8000"
 
 
 def get_lists():
